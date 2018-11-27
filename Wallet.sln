@@ -1,0 +1,88 @@
+
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wallet.Entities", "Wallet.Entities\Wallet.Entities.csproj", "{566352D5-4958-4924-B29B-5FF49B438270}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wallet.Objects", "Wallet.Objects\Wallet.Objects.csproj", "{65E306CE-D4EA-4FC2-85E9-F6F04720D648}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wallet.Repository", "Wallet.Repository\Wallet.Repository.csproj", "{DE3F31CB-F978-4D70-83C3-5125E67A58E9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wallet.Repository.MySQL", "Wallet.Repository.MySQL\Wallet.Repository.MySQL.csproj", "{DD6365D8-3199-40E9-8D24-F94632217134}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wallet.Services.Entity", "Wallet.Services.Entity\Wallet.Services.Entity.csproj", "{0830D531-085B-44D4-9FFD-463A15E161E3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wallet.Services.Task", "Wallet.Services.Task\Wallet.Services.Task.csproj", "{3FD1CDD7-052F-4712-92B8-2F789BBE67A5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wallet.DI", "Wallet.DI\Wallet.DI.csproj", "{5AB32651-45BF-4C56-8569-BD86A5B63D62}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wallet.DTO", "Wallet.DTO\Wallet.DTO.csproj", "{15CBF705-6EC3-47A6-9A6A-6B5E644B91D3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wallet.API.Messages", "Wallet.API.Messages\Wallet.API.Messages.csproj", "{487B38BB-EC36-4E91-B545-2ABDC17A5897}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wallet.API", "Wallet.API\Wallet.API.csproj", "{F30F4B26-F1D2-4CF9-9E24-C434689D00BF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wallet.Adapter", "Wallet.Adapter\Wallet.Adapter.csproj", "{2DB5F912-BBC5-484B-BB57-8CC5745E350C}"
+EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{80491B40-26FF-4044-B71F-451726322FD4}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{CC295560-0DB0-4B09-89B1-6E23C2A366BB}"
+	ProjectSection(SolutionItems) = preProject
+		Makefile = Makefile
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{566352D5-4958-4924-B29B-5FF49B438270}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{566352D5-4958-4924-B29B-5FF49B438270}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{566352D5-4958-4924-B29B-5FF49B438270}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{566352D5-4958-4924-B29B-5FF49B438270}.Release|Any CPU.Build.0 = Release|Any CPU
+		{65E306CE-D4EA-4FC2-85E9-F6F04720D648}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{65E306CE-D4EA-4FC2-85E9-F6F04720D648}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{65E306CE-D4EA-4FC2-85E9-F6F04720D648}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{65E306CE-D4EA-4FC2-85E9-F6F04720D648}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DE3F31CB-F978-4D70-83C3-5125E67A58E9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DE3F31CB-F978-4D70-83C3-5125E67A58E9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DE3F31CB-F978-4D70-83C3-5125E67A58E9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DE3F31CB-F978-4D70-83C3-5125E67A58E9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DD6365D8-3199-40E9-8D24-F94632217134}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DD6365D8-3199-40E9-8D24-F94632217134}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DD6365D8-3199-40E9-8D24-F94632217134}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DD6365D8-3199-40E9-8D24-F94632217134}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0830D531-085B-44D4-9FFD-463A15E161E3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0830D531-085B-44D4-9FFD-463A15E161E3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0830D531-085B-44D4-9FFD-463A15E161E3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0830D531-085B-44D4-9FFD-463A15E161E3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3FD1CDD7-052F-4712-92B8-2F789BBE67A5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3FD1CDD7-052F-4712-92B8-2F789BBE67A5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3FD1CDD7-052F-4712-92B8-2F789BBE67A5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3FD1CDD7-052F-4712-92B8-2F789BBE67A5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5AB32651-45BF-4C56-8569-BD86A5B63D62}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5AB32651-45BF-4C56-8569-BD86A5B63D62}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5AB32651-45BF-4C56-8569-BD86A5B63D62}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5AB32651-45BF-4C56-8569-BD86A5B63D62}.Release|Any CPU.Build.0 = Release|Any CPU
+		{15CBF705-6EC3-47A6-9A6A-6B5E644B91D3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{15CBF705-6EC3-47A6-9A6A-6B5E644B91D3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{15CBF705-6EC3-47A6-9A6A-6B5E644B91D3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{15CBF705-6EC3-47A6-9A6A-6B5E644B91D3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{487B38BB-EC36-4E91-B545-2ABDC17A5897}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{487B38BB-EC36-4E91-B545-2ABDC17A5897}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{487B38BB-EC36-4E91-B545-2ABDC17A5897}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{487B38BB-EC36-4E91-B545-2ABDC17A5897}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F30F4B26-F1D2-4CF9-9E24-C434689D00BF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F30F4B26-F1D2-4CF9-9E24-C434689D00BF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F30F4B26-F1D2-4CF9-9E24-C434689D00BF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F30F4B26-F1D2-4CF9-9E24-C434689D00BF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2DB5F912-BBC5-484B-BB57-8CC5745E350C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2DB5F912-BBC5-484B-BB57-8CC5745E350C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2DB5F912-BBC5-484B-BB57-8CC5745E350C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2DB5F912-BBC5-484B-BB57-8CC5745E350C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{80491B40-26FF-4044-B71F-451726322FD4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{80491B40-26FF-4044-B71F-451726322FD4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{80491B40-26FF-4044-B71F-451726322FD4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{80491B40-26FF-4044-B71F-451726322FD4}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

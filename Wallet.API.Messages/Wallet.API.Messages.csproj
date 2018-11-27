@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Core.Framework.API.Messages" Version="1.2.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Accounts\" />
+    <Folder Include="Transactions\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Wallet.DTO\Wallet.DTO.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Remove="Accounts\ConsumeAccountTypeRequest.cs" />
+  </ItemGroup>
+</Project>
