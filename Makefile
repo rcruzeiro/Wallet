@@ -9,7 +9,7 @@ build: stop restore
 	docker-compose build
 
 .PHONY: up
-up: prune
+up:
 	docker-compose up -d
 
 .PHONY: stop

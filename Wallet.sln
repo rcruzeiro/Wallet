@@ -28,7 +28,10 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{CC295560-0DB0-4B09-89B1-6E23C2A366BB}"
 	ProjectSection(SolutionItems) = preProject
 		Makefile = Makefile
+		README.md = README.md
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wallet.Repository.Mongo", "Wallet.Repository.Mongo\Wallet.Repository.Mongo.csproj", "{B3FE616C-A05C-4451-AF00-6159F04FAA97}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -84,5 +87,9 @@ Global
 		{80491B40-26FF-4044-B71F-451726322FD4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{80491B40-26FF-4044-B71F-451726322FD4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{80491B40-26FF-4044-B71F-451726322FD4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B3FE616C-A05C-4451-AF00-6159F04FAA97}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B3FE616C-A05C-4451-AF00-6159F04FAA97}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B3FE616C-A05C-4451-AF00-6159F04FAA97}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B3FE616C-A05C-4451-AF00-6159F04FAA97}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

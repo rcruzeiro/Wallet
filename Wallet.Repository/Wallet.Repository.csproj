@@ -9,5 +9,6 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Wallet.Entities\Wallet.Entities.csproj" />
+    <ProjectReference Include="..\Wallet.Objects\Wallet.Objects.csproj" />
   </ItemGroup>
 </Project>

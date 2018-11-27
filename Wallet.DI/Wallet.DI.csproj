@@ -9,5 +9,9 @@
     <ProjectReference Include="..\Wallet.Services.Task\Wallet.Services.Task.csproj" />
     <ProjectReference Include="..\Wallet.Repository.MySQL\Wallet.Repository.MySQL.csproj" />
     <ProjectReference Include="..\Wallet.Repository\Wallet.Repository.csproj" />
+    <ProjectReference Include="..\Wallet.Repository.Mongo\Wallet.Repository.Mongo.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.Configuration" Version="2.1.1" />
   </ItemGroup>
 </Project>

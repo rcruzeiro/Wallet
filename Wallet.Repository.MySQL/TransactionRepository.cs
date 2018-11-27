@@ -5,8 +5,8 @@ namespace Wallet.Repository.MySQL
 {
     public sealed class TransactionRepository : BaseRepository<Transaction>, ITransactionRepository
     {
-        public TransactionRepository(string connString)
-            : base(new ContextFactory(connString).CreateDbContext())
+        public TransactionRepository(string connstring)
+            : base(new ContextFactory(connstring).CreateDbContext())
         { }
     }
 }

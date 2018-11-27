@@ -6,18 +6,17 @@ namespace Wallet.Repository.MySQL.Context
 {
     sealed class ContextFactory : IDesignTimeDbContextFactory<WalletContext>
     {
-        readonly string _connString;
+        readonly string _connstring;
 
-        public ContextFactory(string connString)
+        public ContextFactory(string connstring)
         {
-            _connString = connString;
-            //_connString = "Server=database;Port=3306;Uid=root;Pwd=secret;Database=wallet";
+            _connstring = connstring;
         }
 
         //constructor only used by the dotnet ef commands
         public ContextFactory()
         {
-            _connString = "Server=localhost;Port=3306;Uid=root;Pwd=secret;Database=wallet";
+            _connstring = "Server=localhost;Port=3306;Uid=root;Pwd=secret;Database=wallet";
         }
 
         public WalletContext CreateDbContext(string[] args)
@@ -26,7 +25,7 @@ namespace Wallet.Repository.MySQL.Context
             {
                 var builder = new DbContextOptionsBuilder<WalletContext>();
                 builder.UseLazyLoadingProxies();
-                builder.UseMySql(_connString);
+                builder.UseMySql(_connstring);
                 return new WalletContext(builder.Options);
             }
             catch (Exception ex)

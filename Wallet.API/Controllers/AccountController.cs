@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using Core.Framework.API.Messages;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 using Wallet.Adapter;
 using Wallet.API.Messages.Accounts;
 using Wallet.DI;
@@ -12,6 +13,13 @@ namespace Wallet.API.Controllers
     [Route("clients/{clientID}/[controller]")]
     public class AccountController : BaseController
     {
+        readonly IConfiguration _configuration;
+
+        public AccountController(IConfiguration configuration)
+        {
+            _configuration = configuration;
+        }
+
         /// <summary>
         /// Creates a new giftcard.
         /// </summary>
@@ -31,7 +39,7 @@ namespace Wallet.API.Controllers
 
             try
             {
-                var factory = WalletFactory.Instance.GetCreateAccount();
+                var factory = WalletFactory.Instance.GetCreateAccount(_configuration);
                 var account = await factory.Create(clientID, null,
                                                    request.AccountID, request.LocationID,
                                                    request.InitialValue, request.ExpiresOn,
@@ -72,7 +80,7 @@ namespace Wallet.API.Controllers
 
             try
             {
-                var factory = WalletFactory.Instance.GetCreateAccount();
+                var factory = WalletFactory.Instance.GetCreateAccount(_configuration);
                 var account = await factory.Create(clientID, cpf,
                                                    request.AccountID, request.LocationID,
                                                    request.InitialValue, request.ExpiresOn,
@@ -114,7 +122,7 @@ namespace Wallet.API.Controllers
 
             try
             {
-                var factory = WalletFactory.Instance.GetAccount();
+                var factory = WalletFactory.Instance.GetAccount(_configuration);
                 var account = factory.GetAccount(clientID, accountID);
 
                 if (account == null)
@@ -156,7 +164,7 @@ namespace Wallet.API.Controllers
 
             try
             {
-                var factory = WalletFactory.Instance.GetAccount();
+                var factory = WalletFactory.Instance.GetAccount(_configuration);
                 var accounts = factory.GetAccounts(clientID, cpf);
 
                 if (accounts.Count == 0)
@@ -198,7 +206,7 @@ namespace Wallet.API.Controllers
 
             try
             {
-                var factory = WalletFactory.Instance.GetAccount();
+                var factory = WalletFactory.Instance.GetAccount(_configuration);
                 var balance = factory.GetBalance(clientID, cpf, accountType);
                 response.StatusCode = "200";
                 response.Data.Add(new AccountBalanceDTO
@@ -234,7 +242,7 @@ namespace Wallet.API.Controllers
 
             try
             {
-                var factory = WalletFactory.Instance.GetAccount();
+                var factory = WalletFactory.Instance.GetAccount(_configuration);
                 var account = await factory.UpdateGiftcard(clientID, accountID, request.CPF);
                 response.StatusCode = "200";
                 response.Data.Add(account.AccountID);
@@ -267,7 +275,7 @@ namespace Wallet.API.Controllers
 
             try
             {
-                var factory = WalletFactory.Instance.GetChargeGiftcard();
+                var factory = WalletFactory.Instance.GetChargeGiftcard(_configuration);
                 var account = await factory.Charge(clientID, accountID,
                                                    request.LocationID, request.Value, request.NowExpiresOn);
                 var dto = new ManageAccountDTO
@@ -304,7 +312,7 @@ namespace Wallet.API.Controllers
 
             try
             {
-                var factory = WalletFactory.Instance.GetConsumeAccount();
+                var factory = WalletFactory.Instance.GetConsumeAccount(_configuration);
                 var account = await factory.Consume(clientID, accountID, request.LocationID, request.Value);
                 response.StatusCode = "200";
                 response.Data.Add(account);
@@ -337,7 +345,7 @@ namespace Wallet.API.Controllers
 
             try
             {
-                var factory = WalletFactory.Instance.GetConsumeAccount();
+                var factory = WalletFactory.Instance.GetConsumeAccount(_configuration);
                 var account = await factory.Consume(clientID, cpf, request.LocationID, accountType, request.Value);
                 response.StatusCode = "200";
                 account.ForEach(trID => response.Data.Add(trID));

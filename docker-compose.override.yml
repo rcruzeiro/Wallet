@@ -30,6 +30,7 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_URLS=http://+:8080
+      - DB_CONNECTION_NAME=DefaultConnection
     ports:
       - 80:8080
     links:

@@ -1,4 +1,5 @@
 ﻿using System;
+using Microsoft.Extensions.Configuration;
 using Wallet.Services.Entity;
 using Wallet.Services.Task;
 
@@ -14,51 +15,51 @@ namespace Wallet.DI
         WalletFactory()
         { }
 
-        public AccountEntityService GetAccount()
+        public AccountEntityService GetAccount(IConfiguration configuration)
         {
             try
             {
-                return ServiceFactory.GetAccountEntityService();
+                return ServiceFactory.GetAccountEntityService(configuration);
             }
             catch (Exception ex)
             { throw ex; }
         }
 
-        public TransactionEntityService GetTransaction()
+        public TransactionEntityService GetTransaction(IConfiguration configuration)
         {
             try
             {
-                return ServiceFactory.GetTransactionEntityService();
+                return ServiceFactory.GetTransactionEntityService(configuration);
             }
             catch (Exception ex)
             { throw ex; }
         }
 
-        public CreateAccountTaskService GetCreateAccount()
+        public CreateAccountTaskService GetCreateAccount(IConfiguration configuration)
         {
             try
             {
-                return ServiceFactory.GetCreateAccountTaskService();
+                return ServiceFactory.GetCreateAccountTaskService(configuration);
             }
             catch (Exception ex)
             { throw ex; }
         }
 
-        public ChargeGiftcardTaskService GetChargeGiftcard()
+        public ChargeGiftcardTaskService GetChargeGiftcard(IConfiguration configuration)
         {
             try
             {
-                return ServiceFactory.GetChargeGiftcardTaskService();
+                return ServiceFactory.GetChargeGiftcardTaskService(configuration);
             }
             catch (Exception ex)
             { throw ex; }
         }
 
-        public ConsumeAccountTaskService GetConsumeAccount()
+        public ConsumeAccountTaskService GetConsumeAccount(IConfiguration configuration)
         {
             try
             {
-                return ServiceFactory.GetConsumeAccountTaskService();
+                return ServiceFactory.GetConsumeAccountTaskService(configuration);
             }
             catch (Exception ex)
             { throw ex; }
