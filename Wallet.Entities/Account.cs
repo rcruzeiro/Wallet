@@ -6,7 +6,6 @@ namespace Wallet.Entities
 {
     public class Account : BaseEntity
     {
-        public string ClientID { get; set; }
         public string AccountID { get; set; }
         public string CPF { get; set; }
         public AccountType AccountType { get; set; }

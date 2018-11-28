@@ -2,7 +2,6 @@
 {
     public class Transaction : BaseEntity
     {
-        public string ClientID { get; set; }
         public string CPF { get; set; }
         public string AccountID { get; set; }
         public string LocationID { get; set; }
