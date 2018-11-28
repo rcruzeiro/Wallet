@@ -1,5 +1,5 @@
 # Wallet
-Wallet microservice for omnichannel payment methods (like vouchers or gift card, etc.) management and multitenant scenario.
+Wallet microservice for omnichannel payment methods (like vouchers or gift card, etc.) management in a multitenant scenario.
 
 ### Prerequisite
 
