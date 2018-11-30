@@ -35,7 +35,7 @@ namespace Wallet.API.Controllers
         public async Task<ActionResult<CreateAccountResponse>> CreateGiftcard([FromRoute]string clientID, [FromBody]CreateAccountRequest request)
         {
             CreateAccountResponse response = new CreateAccountResponse();
-            string responseCode = $"CREATE_GIFT";
+            string responseCode = $"CREATE_GIFT_{clientID}";
 
             try
             {
@@ -76,7 +76,7 @@ namespace Wallet.API.Controllers
         public async Task<ActionResult<CreateAccountResponse>> CreateVoucher([FromRoute]string clientID, [FromRoute]string cpf, [FromBody]CreateAccountRequest request)
         {
             CreateAccountResponse response = new CreateAccountResponse();
-            string responseCode = $"CREATE_VOUCHER_{cpf}";
+            string responseCode = $"CREATE_VOUCHER_{clientID}_{cpf}";
 
             try
             {
@@ -118,7 +118,7 @@ namespace Wallet.API.Controllers
         public ActionResult<GetAccountResponse> Get([FromRoute]string clientID, [FromRoute]string accountID)
         {
             GetAccountResponse response = new GetAccountResponse();
-            string responseCode = $"GET_ACCOUNT_{accountID}";
+            string responseCode = $"GET_ACCOUNT_{clientID}_{accountID}";
 
             try
             {
@@ -160,7 +160,7 @@ namespace Wallet.API.Controllers
         public ActionResult<GetAccountResponse> GetAccounts([FromRoute]string clientID, [FromRoute]string cpf)
         {
             GetAccountResponse response = new GetAccountResponse();
-            string responseCode = $"GET_ACCOUNTS_{cpf}";
+            string responseCode = $"GET_ACCOUNTS_{clientID}_{cpf}";
 
             try
             {
@@ -202,7 +202,7 @@ namespace Wallet.API.Controllers
         public ActionResult<GetAccountBalanceResponse> GetAccountBalance([FromRoute]string clientID, [FromRoute]string cpf, [FromRoute]int accountType)
         {
             GetAccountBalanceResponse response = new GetAccountBalanceResponse();
-            string responseCode = $"GET_BALANCE_{cpf}";
+            string responseCode = $"GET_BALANCE_{clientID}_{cpf}";
 
             try
             {
@@ -238,7 +238,7 @@ namespace Wallet.API.Controllers
         public async Task<ActionResult<UpdateAccountResponse>> Put([FromRoute]string clientID, [FromRoute]string accountID, [FromBody]UpdateAccountRequest request)
         {
             UpdateAccountResponse response = new UpdateAccountResponse();
-            string responseCode = $"UPDATE_{accountID}";
+            string responseCode = $"UPDATE_{clientID}_{accountID}";
 
             try
             {
@@ -271,7 +271,7 @@ namespace Wallet.API.Controllers
         public async Task<ActionResult<ManageAccountResponse>> Charge([FromRoute]string clientID, [FromRoute]string accountID, [FromBody]ChargeAccountRequest request)
         {
             ManageAccountResponse response = new ManageAccountResponse();
-            string responseCode = $"CHARGE_{accountID}";
+            string responseCode = $"CHARGE_{clientID}_{accountID}";
 
             try
             {
@@ -308,7 +308,7 @@ namespace Wallet.API.Controllers
         public async Task<ActionResult<UpdateAccountResponse>> ConsumeAccount([FromRoute]string clientID, [FromRoute]string accountID, [FromBody]ConsumeAccountRequest request)
         {
             UpdateAccountResponse response = new UpdateAccountResponse();
-            string responseCode = $"CONSUME_{accountID}";
+            string responseCode = $"CONSUME_{clientID}_{accountID}";
 
             try
             {
@@ -341,7 +341,7 @@ namespace Wallet.API.Controllers
         public async Task<ActionResult<UpdateAccountResponse>> ConsumeBalance([FromRoute]string clientID, [FromRoute]string cpf, [FromRoute]int accountType, [FromBody]ConsumeAccountRequest request)
         {
             UpdateAccountResponse response = new UpdateAccountResponse();
-            string responseCode = $"CONSUME_ACCOUNT_{accountType}_FROM_{cpf}";
+            string responseCode = $"CONSUME_ACCOUNT_{clientID}_{accountType}_FROM_{cpf}";
 
             try
             {
