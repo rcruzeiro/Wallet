@@ -1,4 +1,6 @@
-﻿namespace Wallet.DTO.Transactions
+﻿using System;
+
+namespace Wallet.DTO.Transactions
 {
     public class TransactionDTO
     {
@@ -6,5 +8,6 @@
         public int OperationType { get; set; }
         public int EventType { get; set; }
         public decimal Value { get; set; }
+        public DateTime PlacedAt { get; set; }
     }
 }

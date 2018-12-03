@@ -18,7 +18,8 @@ namespace Wallet.Adapter
                     EventType = (int)transaction.EventType,
                     LocationID = transaction.LocationID,
                     OperationType = (int)transaction.OperationType,
-                    Value = transaction.Value
+                    Value = transaction.Value,
+                    PlacedAt = transaction.CreatedAt ?? transaction.CreatedAt.Value
                 };
             }
             catch (Exception ex)
