@@ -5,7 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Core.Framework.API.Messages" Version="1.2.0" />
+    <PackageReference Include="Core.Framework.API.Messages" Version="1.3.0" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.1" />
   </ItemGroup>
   <ItemGroup>

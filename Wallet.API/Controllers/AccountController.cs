@@ -50,7 +50,7 @@ namespace Wallet.API.Controllers
                     TransactionID = account.Item2
                 };
                 response.StatusCode = "200";
-                response.Data.Add(dto);
+                response.Data = dto;
                 return Ok(response);
             }
             catch (Exception ex)
@@ -91,7 +91,7 @@ namespace Wallet.API.Controllers
                     TransactionID = account.Item2
                 };
                 response.StatusCode = "200";
-                response.Data.Add(dto);
+                response.Data = dto;
                 return Ok(response);
             }
             catch (Exception ex)
@@ -133,7 +133,7 @@ namespace Wallet.API.Controllers
                 }
 
                 response.StatusCode = "200";
-                response.Data.Add(account.Adapt());
+                response.Data = account.Adapt();
                 return Ok(response);
             }
             catch (Exception ex)
@@ -153,13 +153,13 @@ namespace Wallet.API.Controllers
         /// <response code="404">No accounts was found for the specified CPF.</response>
         /// <response code="500">Server internal error. See response messages for details.</response>
         [Produces("application/json")]
-        [ProducesResponseType(typeof(GetAccountResponse), 200)]
-        [ProducesResponseType(typeof(GetAccountResponse), 404)]
-        [ProducesResponseType(typeof(GetAccountResponse), 500)]
+        [ProducesResponseType(typeof(GetAccountsResponse), 200)]
+        [ProducesResponseType(typeof(GetAccountsResponse), 404)]
+        [ProducesResponseType(typeof(GetAccountsResponse), 500)]
         [HttpGet("customers/{cpf}")]
-        public ActionResult<GetAccountResponse> GetAccounts([FromRoute]string clientID, [FromRoute]string cpf)
+        public ActionResult<GetAccountsResponse> GetAccounts([FromRoute]string clientID, [FromRoute]string cpf)
         {
-            GetAccountResponse response = new GetAccountResponse();
+            GetAccountsResponse response = new GetAccountsResponse();
             string responseCode = $"GET_ACCOUNTS_{clientID}_{cpf}";
 
             try
@@ -209,10 +209,10 @@ namespace Wallet.API.Controllers
                 var factory = WalletFactory.Instance.GetAccount(_configuration);
                 var balance = factory.GetBalance(clientID, cpf, accountType);
                 response.StatusCode = "200";
-                response.Data.Add(new AccountBalanceDTO
+                response.Data = new AccountBalanceDTO
                 {
                     Balance = string.Format("{0:N}", balance)
-                });
+                };
                 return Ok(response);
             }
             catch (Exception ex)
@@ -245,7 +245,7 @@ namespace Wallet.API.Controllers
                 var factory = WalletFactory.Instance.GetAccount(_configuration);
                 var account = await factory.UpdateGiftcard(clientID, accountID, request.CPF);
                 response.StatusCode = "200";
-                response.Data.Add(account.AccountID);
+                response.Data = account.AccountID;
                 return Ok(response);
             }
             catch (Exception ex)
@@ -283,7 +283,7 @@ namespace Wallet.API.Controllers
                     TransactionID = account
                 };
                 response.StatusCode = "200";
-                response.Data.Add(dto);
+                response.Data = dto;
                 return Ok(response);
             }
             catch (Exception ex)
@@ -315,7 +315,7 @@ namespace Wallet.API.Controllers
                 var factory = WalletFactory.Instance.GetConsumeAccount(_configuration);
                 var account = await factory.Consume(clientID, accountID, request.LocationID, request.Value);
                 response.StatusCode = "200";
-                response.Data.Add(account);
+                response.Data = account;
                 return Ok(response);
             }
             catch (Exception ex)
@@ -335,12 +335,12 @@ namespace Wallet.API.Controllers
         /// <param name="request">Request DTO.</param>
         /// <response code="500">Server internal error. See response messages for details.</response>
         [Produces("application/json")]
-        [ProducesResponseType(typeof(UpdateAccountResponse), 200)]
-        [ProducesResponseType(typeof(UpdateAccountResponse), 500)]
+        [ProducesResponseType(typeof(UpdateAccountsResponse), 200)]
+        [ProducesResponseType(typeof(UpdateAccountsResponse), 500)]
         [HttpPost("customers/{cpf}/consume/{accountType}")]
-        public async Task<ActionResult<UpdateAccountResponse>> ConsumeBalance([FromRoute]string clientID, [FromRoute]string cpf, [FromRoute]int accountType, [FromBody]ConsumeAccountRequest request)
+        public async Task<ActionResult<UpdateAccountsResponse>> ConsumeBalance([FromRoute]string clientID, [FromRoute]string cpf, [FromRoute]int accountType, [FromBody]ConsumeAccountRequest request)
         {
-            UpdateAccountResponse response = new UpdateAccountResponse();
+            UpdateAccountsResponse response = new UpdateAccountsResponse();
             string responseCode = $"CONSUME_ACCOUNT_{clientID}_{accountType}_FROM_{cpf}";
 
             try
@@ -348,7 +348,8 @@ namespace Wallet.API.Controllers
                 var factory = WalletFactory.Instance.GetConsumeAccount(_configuration);
                 var account = await factory.Consume(clientID, cpf, request.LocationID, accountType, request.Value);
                 response.StatusCode = "200";
-                account.ForEach(trID => response.Data.Add(trID));
+                account.ForEach(trID =>
+                    response.Data.Add(trID));
                 return Ok(response);
             }
             catch (Exception ex)
