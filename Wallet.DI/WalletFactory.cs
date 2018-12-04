@@ -15,51 +15,51 @@ namespace Wallet.DI
         WalletFactory()
         { }
 
-        public AccountEntityService GetAccount(IConfiguration configuration)
+        public AccountEntityService GetAccount(IConfiguration configuration, string connName)
         {
             try
             {
-                return ServiceFactory.GetAccountEntityService(configuration);
+                return ServiceFactory.GetAccountEntityService(configuration, connName);
             }
             catch (Exception ex)
             { throw ex; }
         }
 
-        public TransactionEntityService GetTransaction(IConfiguration configuration)
+        public TransactionEntityService GetTransaction(IConfiguration configuration, string connName)
         {
             try
             {
-                return ServiceFactory.GetTransactionEntityService(configuration);
+                return ServiceFactory.GetTransactionEntityService(configuration, connName);
             }
             catch (Exception ex)
             { throw ex; }
         }
 
-        public CreateAccountTaskService GetCreateAccount(IConfiguration configuration)
+        public CreateAccountTaskService GetCreateAccount(IConfiguration configuration, params string[] connNames)
         {
             try
             {
-                return ServiceFactory.GetCreateAccountTaskService(configuration);
+                return ServiceFactory.GetCreateAccountTaskService(configuration, connNames);
             }
             catch (Exception ex)
             { throw ex; }
         }
 
-        public ChargeGiftcardTaskService GetChargeGiftcard(IConfiguration configuration)
+        public ChargeGiftcardTaskService GetChargeGiftcard(IConfiguration configuration, params string[] connNames)
         {
             try
             {
-                return ServiceFactory.GetChargeGiftcardTaskService(configuration);
+                return ServiceFactory.GetChargeGiftcardTaskService(configuration, connNames);
             }
             catch (Exception ex)
             { throw ex; }
         }
 
-        public ConsumeAccountTaskService GetConsumeAccount(IConfiguration configuration)
+        public ConsumeAccountTaskService GetConsumeAccount(IConfiguration configuration, params string[] connNames)
         {
             try
             {
-                return ServiceFactory.GetConsumeAccountTaskService(configuration);
+                return ServiceFactory.GetConsumeAccountTaskService(configuration, connNames);
             }
             catch (Exception ex)
             { throw ex; }

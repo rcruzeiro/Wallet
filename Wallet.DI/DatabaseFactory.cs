@@ -8,34 +8,31 @@ namespace Wallet.DI
 {
     static class DatabaseFactory
     {
-        static readonly string _connName =
-            Environment.GetEnvironmentVariable("DB_CONNECTION_NAME");
-
-        internal static IAccountRepository GetAccountRepository(IConfiguration configuration)
+        internal static IAccountRepository GetAccountRepository(IConfiguration configuration, string connName)
         {
             try
             {
-                return new AccountRepository(configuration.GetConnectionString(_connName));
+                return new AccountRepository(configuration.GetConnectionString(connName));
             }
             catch (Exception ex)
             { throw ex; }
         }
 
-        internal static ITransactionRepository GetTransactionRepository(IConfiguration configuration)
+        internal static ITransactionRepository GetTransactionRepository(IConfiguration configuration, string connName)
         {
             try
             {
-                return new TransactionRepository(configuration.GetConnectionString(_connName));
+                return new TransactionRepository(configuration.GetConnectionString(connName));
             }
             catch (Exception ex)
             { throw ex; }
         }
 
-        internal static IWalletBlockchainRepository GetWalletBlockchainRepository(IConfiguration configuration)
+        internal static IWalletBlockchainRepository GetWalletBlockchainRepository(IConfiguration configuration, string connName)
         {
             try
             {
-                return new WalletBlockchainRepository(configuration.GetValue<string>("MongoConnection"));
+                return new WalletBlockchainRepository(configuration.GetValue<string>(connName));
             }
             catch (Exception ex)
             { throw ex; }

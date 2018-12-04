@@ -30,7 +30,9 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_URLS=http://+:8080
-      - DB_CONNECTION_NAME=DefaultConnection
+      - DB_CONNECTION_DEFAULT_NAME=DefaultConnection
+      - DB_CONNECTION_READ_NAME=ReadConnection
+      - MONGO_CONNECTION=MongoConnection
     ports:
       - 80:8080
     links:

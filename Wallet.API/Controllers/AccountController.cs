@@ -13,12 +13,9 @@ namespace Wallet.API.Controllers
     [Route("clients/{clientID}/[controller]")]
     public class AccountController : BaseController
     {
-        readonly IConfiguration _configuration;
-
         public AccountController(IConfiguration configuration)
-        {
-            _configuration = configuration;
-        }
+            : base(configuration)
+        { }
 
         /// <summary>
         /// Creates a new giftcard.
@@ -39,7 +36,7 @@ namespace Wallet.API.Controllers
 
             try
             {
-                var factory = WalletFactory.Instance.GetCreateAccount(_configuration);
+                var factory = WalletFactory.Instance.GetCreateAccount(_configuration, _writeConnection, _mongoConnection);
                 var account = await factory.Create(clientID, null,
                                                    request.AccountID, request.LocationID,
                                                    request.InitialValue, request.ExpiresOn,
@@ -80,7 +77,7 @@ namespace Wallet.API.Controllers
 
             try
             {
-                var factory = WalletFactory.Instance.GetCreateAccount(_configuration);
+                var factory = WalletFactory.Instance.GetCreateAccount(_configuration, _writeConnection, _mongoConnection);
                 var account = await factory.Create(clientID, cpf,
                                                    request.AccountID, request.LocationID,
                                                    request.InitialValue, request.ExpiresOn,
@@ -122,7 +119,7 @@ namespace Wallet.API.Controllers
 
             try
             {
-                var factory = WalletFactory.Instance.GetAccount(_configuration);
+                var factory = WalletFactory.Instance.GetAccount(_configuration, _readConnection);
                 var account = factory.GetAccount(clientID, accountID);
 
                 if (account == null)
@@ -164,7 +161,7 @@ namespace Wallet.API.Controllers
 
             try
             {
-                var factory = WalletFactory.Instance.GetAccount(_configuration);
+                var factory = WalletFactory.Instance.GetAccount(_configuration, _readConnection);
                 var accounts = factory.GetAccounts(clientID, cpf);
 
                 if (accounts.Count == 0)
@@ -206,7 +203,7 @@ namespace Wallet.API.Controllers
 
             try
             {
-                var factory = WalletFactory.Instance.GetAccount(_configuration);
+                var factory = WalletFactory.Instance.GetAccount(_configuration, _readConnection);
                 var balance = factory.GetBalance(clientID, cpf, accountType);
                 response.StatusCode = "200";
                 response.Data = new AccountBalanceDTO
@@ -242,10 +239,14 @@ namespace Wallet.API.Controllers
 
             try
             {
-                var factory = WalletFactory.Instance.GetAccount(_configuration);
+                var factory = WalletFactory.Instance.GetAccount(_configuration, _readConnection);
                 var account = await factory.UpdateGiftcard(clientID, accountID, request.CPF);
+                var dto = new UpdateAccountDTO
+                {
+                    AccountID = account.AccountID
+                };
                 response.StatusCode = "200";
-                response.Data = account.AccountID;
+                response.Data = dto;
                 return Ok(response);
             }
             catch (Exception ex)
@@ -275,12 +276,12 @@ namespace Wallet.API.Controllers
 
             try
             {
-                var factory = WalletFactory.Instance.GetChargeGiftcard(_configuration);
-                var account = await factory.Charge(clientID, accountID,
+                var factory = WalletFactory.Instance.GetChargeGiftcard(_configuration, _writeConnection, _mongoConnection);
+                var transaction = await factory.Charge(clientID, accountID,
                                                    request.LocationID, request.Value, request.NowExpiresOn);
                 var dto = new ManageAccountDTO
                 {
-                    TransactionID = account
+                    TransactionID = transaction
                 };
                 response.StatusCode = "200";
                 response.Data = dto;
@@ -302,20 +303,24 @@ namespace Wallet.API.Controllers
         /// <param name="request">Request DTO.</param>
         /// <response code="500">Server internal error. See response messages for details.</response>
         [Produces("application/json")]
-        [ProducesResponseType(typeof(UpdateAccountResponse), 200)]
-        [ProducesResponseType(typeof(UpdateAccountResponse), 500)]
+        [ProducesResponseType(typeof(ManageAccountResponse), 200)]
+        [ProducesResponseType(typeof(ManageAccountResponse), 500)]
         [HttpPost("{accountID}/consume")]
-        public async Task<ActionResult<UpdateAccountResponse>> ConsumeAccount([FromRoute]string clientID, [FromRoute]string accountID, [FromBody]ConsumeAccountRequest request)
+        public async Task<ActionResult<ManageAccountResponse>> ConsumeAccount([FromRoute]string clientID, [FromRoute]string accountID, [FromBody]ConsumeAccountRequest request)
         {
-            UpdateAccountResponse response = new UpdateAccountResponse();
+            ManageAccountResponse response = new ManageAccountResponse();
             string responseCode = $"CONSUME_{clientID}_{accountID}";
 
             try
             {
-                var factory = WalletFactory.Instance.GetConsumeAccount(_configuration);
-                var account = await factory.Consume(clientID, accountID, request.LocationID, request.Value);
+                var factory = WalletFactory.Instance.GetConsumeAccount(_configuration, _writeConnection, _mongoConnection);
+                var transaction = await factory.Consume(clientID, accountID, request.LocationID, request.Value);
+                var dto = new ManageAccountDTO
+                {
+                    TransactionID = transaction
+                };
                 response.StatusCode = "200";
-                response.Data = account;
+                response.Data = dto;
                 return Ok(response);
             }
             catch (Exception ex)
@@ -335,21 +340,24 @@ namespace Wallet.API.Controllers
         /// <param name="request">Request DTO.</param>
         /// <response code="500">Server internal error. See response messages for details.</response>
         [Produces("application/json")]
-        [ProducesResponseType(typeof(UpdateAccountsResponse), 200)]
-        [ProducesResponseType(typeof(UpdateAccountsResponse), 500)]
+        [ProducesResponseType(typeof(ManageAccountsResponse), 200)]
+        [ProducesResponseType(typeof(ManageAccountsResponse), 500)]
         [HttpPost("customers/{cpf}/consume/{accountType}")]
-        public async Task<ActionResult<UpdateAccountsResponse>> ConsumeBalance([FromRoute]string clientID, [FromRoute]string cpf, [FromRoute]int accountType, [FromBody]ConsumeAccountRequest request)
+        public async Task<ActionResult<ManageAccountsResponse>> ConsumeBalance([FromRoute]string clientID, [FromRoute]string cpf, [FromRoute]int accountType, [FromBody]ConsumeAccountRequest request)
         {
-            UpdateAccountsResponse response = new UpdateAccountsResponse();
+            ManageAccountsResponse response = new ManageAccountsResponse();
             string responseCode = $"CONSUME_ACCOUNT_{clientID}_{accountType}_FROM_{cpf}";
 
             try
             {
-                var factory = WalletFactory.Instance.GetConsumeAccount(_configuration);
-                var account = await factory.Consume(clientID, cpf, request.LocationID, accountType, request.Value);
+                var factory = WalletFactory.Instance.GetConsumeAccount(_configuration, _writeConnection, _mongoConnection);
+                var transactions = await factory.Consume(clientID, cpf, request.LocationID, accountType, request.Value);
                 response.StatusCode = "200";
-                account.ForEach(trID =>
-                    response.Data.Add(trID));
+                transactions.ForEach(transaction =>
+                    response.Data.Add(new ManageAccountDTO
+                    {
+                        TransactionID = transaction
+                    }));
                 return Ok(response);
             }
             catch (Exception ex)

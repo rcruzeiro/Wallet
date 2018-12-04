@@ -1,10 +1,15 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 
 namespace Wallet.API.Controllers
 {
     [Route("[controller]")]
     public class HealthController : BaseController
     {
+        public HealthController(IConfiguration configuration)
+            : base(configuration)
+        { }
+
         /// <summary>
         /// Service health check.
         /// </summary>

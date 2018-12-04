@@ -7,67 +7,67 @@ namespace Wallet.DI
 {
     static class ServiceFactory
     {
-        internal static AccountEntityService GetAccountEntityService(IConfiguration configuration)
+        internal static AccountEntityService GetAccountEntityService(IConfiguration configuration, params string[] connNames)
         {
             try
             {
-                return new AccountEntityService(DatabaseFactory.GetAccountRepository(configuration));
+                return new AccountEntityService(DatabaseFactory.GetAccountRepository(configuration, connNames[0]));
             }
             catch (Exception ex)
             { throw ex; }
         }
 
-        internal static TransactionEntityService GetTransactionEntityService(IConfiguration configuration)
+        internal static TransactionEntityService GetTransactionEntityService(IConfiguration configuration, params string[] connNames)
         {
             try
             {
-                return new TransactionEntityService(DatabaseFactory.GetTransactionRepository(configuration));
+                return new TransactionEntityService(DatabaseFactory.GetTransactionRepository(configuration, connNames[0]));
             }
             catch (Exception ex)
             { throw ex; }
         }
 
-        internal static WalletBlockchainEntityService GetWalletBlockchainEntityService(IConfiguration configuration)
+        internal static WalletBlockchainEntityService GetWalletBlockchainEntityService(IConfiguration configuration, params string[] connNames)
         {
             try
             {
-                return new WalletBlockchainEntityService(DatabaseFactory.GetWalletBlockchainRepository(configuration));
+                return new WalletBlockchainEntityService(DatabaseFactory.GetWalletBlockchainRepository(configuration, connNames[0]));
             }
             catch (Exception ex)
             { throw ex; }
         }
 
-        internal static CreateAccountTaskService GetCreateAccountTaskService(IConfiguration configuration)
+        internal static CreateAccountTaskService GetCreateAccountTaskService(IConfiguration configuration, params string[] connNames)
         {
             try
             {
-                return new CreateAccountTaskService(GetAccountEntityService(configuration),
-                                                    GetTransactionEntityService(configuration),
-                                                    GetWalletBlockchainEntityService(configuration));
+                return new CreateAccountTaskService(GetAccountEntityService(configuration, connNames[0]),
+                                                    GetTransactionEntityService(configuration, connNames[0]),
+                                                    GetWalletBlockchainEntityService(configuration, connNames[1]));
             }
             catch (Exception ex)
             { throw ex; }
         }
 
-        internal static ChargeGiftcardTaskService GetChargeGiftcardTaskService(IConfiguration configuration)
+        internal static ChargeGiftcardTaskService GetChargeGiftcardTaskService(IConfiguration configuration, params string[] connNames)
         {
             try
             {
-                return new ChargeGiftcardTaskService(GetAccountEntityService(configuration),
-                                                     GetTransactionEntityService(configuration),
-                                                     GetWalletBlockchainEntityService(configuration));
+                return new ChargeGiftcardTaskService(GetAccountEntityService(configuration, connNames[0]),
+                                                     GetTransactionEntityService(configuration, connNames[0]),
+                                                     GetWalletBlockchainEntityService(configuration, connNames[1]));
             }
             catch (Exception ex)
             { throw ex; }
         }
 
-        internal static ConsumeAccountTaskService GetConsumeAccountTaskService(IConfiguration configuration)
+        internal static ConsumeAccountTaskService GetConsumeAccountTaskService(IConfiguration configuration, params string[] connNames)
         {
             try
             {
-                return new ConsumeAccountTaskService(GetAccountEntityService(configuration),
-                                                     GetTransactionEntityService(configuration),
-                                                     GetWalletBlockchainEntityService(configuration));
+                return new ConsumeAccountTaskService(GetAccountEntityService(configuration, connNames[0]),
+                                                     GetTransactionEntityService(configuration, connNames[0]),
+                                                     GetWalletBlockchainEntityService(configuration, connNames[1]));
             }
             catch (Exception ex)
             { throw ex; }
