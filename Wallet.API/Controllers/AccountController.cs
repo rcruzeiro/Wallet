@@ -36,7 +36,7 @@ namespace Wallet.API.Controllers
 
             try
             {
-                var factory = WalletFactory.Instance.GetCreateAccount(_configuration, _writeConnection, _mongoConnection);
+                var factory = WalletFactory.Instance.GetCreateAccount(_configuration);
                 var account = await factory.Create(clientID, null,
                                                    request.AccountID, request.LocationID,
                                                    request.InitialValue, request.ExpiresOn,
@@ -77,7 +77,7 @@ namespace Wallet.API.Controllers
 
             try
             {
-                var factory = WalletFactory.Instance.GetCreateAccount(_configuration, _writeConnection, _mongoConnection);
+                var factory = WalletFactory.Instance.GetCreateAccount(_configuration);
                 var account = await factory.Create(clientID, cpf,
                                                    request.AccountID, request.LocationID,
                                                    request.InitialValue, request.ExpiresOn,
@@ -119,7 +119,7 @@ namespace Wallet.API.Controllers
 
             try
             {
-                var factory = WalletFactory.Instance.GetAccount(_configuration, _readConnection);
+                var factory = WalletFactory.Instance.GetAccount(_configuration, true);
                 var account = factory.GetAccount(clientID, accountID);
 
                 if (account == null)
@@ -161,7 +161,7 @@ namespace Wallet.API.Controllers
 
             try
             {
-                var factory = WalletFactory.Instance.GetAccount(_configuration, _readConnection);
+                var factory = WalletFactory.Instance.GetAccount(_configuration, true);
                 var accounts = factory.GetAccounts(clientID, cpf);
 
                 if (accounts.Count == 0)
@@ -203,7 +203,7 @@ namespace Wallet.API.Controllers
 
             try
             {
-                var factory = WalletFactory.Instance.GetAccount(_configuration, _readConnection);
+                var factory = WalletFactory.Instance.GetAccount(_configuration, true);
                 var balance = factory.GetBalance(clientID, cpf, accountType);
                 response.StatusCode = "200";
                 response.Data = new AccountBalanceDTO
@@ -239,7 +239,7 @@ namespace Wallet.API.Controllers
 
             try
             {
-                var factory = WalletFactory.Instance.GetAccount(_configuration, _readConnection);
+                var factory = WalletFactory.Instance.GetAccount(_configuration, true);
                 var account = await factory.UpdateGiftcard(clientID, accountID, request.CPF);
                 var dto = new UpdateAccountDTO
                 {
@@ -276,7 +276,7 @@ namespace Wallet.API.Controllers
 
             try
             {
-                var factory = WalletFactory.Instance.GetChargeGiftcard(_configuration, _writeConnection, _mongoConnection);
+                var factory = WalletFactory.Instance.GetChargeGiftcard(_configuration);
                 var transaction = await factory.Charge(clientID, accountID,
                                                    request.LocationID, request.Value, request.NowExpiresOn);
                 var dto = new ManageAccountDTO
@@ -313,7 +313,7 @@ namespace Wallet.API.Controllers
 
             try
             {
-                var factory = WalletFactory.Instance.GetConsumeAccount(_configuration, _writeConnection, _mongoConnection);
+                var factory = WalletFactory.Instance.GetConsumeAccount(_configuration);
                 var transaction = await factory.Consume(clientID, accountID, request.LocationID, request.Value);
                 var dto = new ManageAccountDTO
                 {
@@ -350,7 +350,7 @@ namespace Wallet.API.Controllers
 
             try
             {
-                var factory = WalletFactory.Instance.GetConsumeAccount(_configuration, _writeConnection, _mongoConnection);
+                var factory = WalletFactory.Instance.GetConsumeAccount(_configuration);
                 var transactions = await factory.Consume(clientID, cpf, request.LocationID, accountType, request.Value);
                 response.StatusCode = "200";
                 transactions.ForEach(transaction =>
